@@ -9,10 +9,15 @@ import org.springframework.context.annotation.Profile;
 
 import com.balieiro.cursomvc.cursomvc.entities.Categoria;
 import com.balieiro.cursomvc.cursomvc.entities.Cidade;
+import com.balieiro.cursomvc.cursomvc.entities.Cliente;
+import com.balieiro.cursomvc.cursomvc.entities.Endereco;
 import com.balieiro.cursomvc.cursomvc.entities.Estado;
 import com.balieiro.cursomvc.cursomvc.entities.Produto;
+import com.balieiro.cursomvc.cursomvc.entities.enums.TipoCliente;
 import com.balieiro.cursomvc.cursomvc.repositories.CategoriaRepository;
 import com.balieiro.cursomvc.cursomvc.repositories.CidadeRepository;
+import com.balieiro.cursomvc.cursomvc.repositories.ClienteRepository;
+import com.balieiro.cursomvc.cursomvc.repositories.EnderecoRepository;
 import com.balieiro.cursomvc.cursomvc.repositories.EstadoRepository;
 import com.balieiro.cursomvc.cursomvc.repositories.ProdutoRepository;
 
@@ -31,6 +36,12 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private EstadoRepository estadoRepository;
+	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -64,6 +75,18 @@ public class TestConfig implements CommandLineRunner{
 		
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "Maria@gmail.com", "12634567891", TipoCliente.PESSOAFISICA);
+		
+		cli1.getTelefones().addAll(Arrays.asList("123456", "1233654789"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "apt 303", "Jardim", "38220834", cli1, c1);
+		Endereco e2 = new Endereco(null, "Av Matos", "105", "Sala 8", "Centro", "14800687", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 	}
 
 }

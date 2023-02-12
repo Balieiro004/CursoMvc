@@ -1,6 +1,5 @@
 package com.balieiro.cursomvc.cursomvc.entities;
 
-import java.time.Instant;
 import java.util.Date;
 
 import com.balieiro.cursomvc.cursomvc.entities.enums.EstadoPagamento;

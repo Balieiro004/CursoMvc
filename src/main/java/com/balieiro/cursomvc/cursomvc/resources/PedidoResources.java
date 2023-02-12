@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.balieiro.cursomvc.cursomvc.entities.Categoria;
-import com.balieiro.cursomvc.cursomvc.services.CategoriaService;
+import com.balieiro.cursomvc.cursomvc.entities.Pedido;
+import com.balieiro.cursomvc.cursomvc.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "categorias")
-public class CategoriaResources {
+@RequestMapping(value = "pedidos")
+public class PedidoResources {
 	
 	@Autowired
-	private CategoriaService service;
+	private PedidoService service;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET) 
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
-		Categoria obj = service.findById(id);
+		Pedido obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 
